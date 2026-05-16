@@ -25,6 +25,7 @@ class ReproducerTest {
     fun testWithNewHost() {
         val result = BasicJvmScriptingHost()
             .evalWithTemplate<ReproScriptDefinition>(scriptFile.toScriptSource())
-        assertIs<ResultWithDiagnostics.Success<*>>(result)
+        val errorMessage = (result as? ResultWithDiagnostics.Failure)?.reports?.joinToString { it.render() }
+        assertIs<ResultWithDiagnostics.Success<*>>(result, "expected success, but got failure with $errorMessage")
     }
 }

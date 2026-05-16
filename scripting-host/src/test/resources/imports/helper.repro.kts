@@ -1,1 +1,1 @@
-inline fun <reified T> T.typeName(): String = T::class.simpleName ?: "?"
+fun Any.typeName(): String = this::class.simpleName ?: "?"
